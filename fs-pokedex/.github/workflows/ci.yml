@@ -14,6 +14,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: fs-pokedex
+
     steps:
       - uses: actions/checkout@v3
 
@@ -31,4 +35,5 @@ jobs:
 
       - name: Trigger Render deployment
         if: github.ref == 'refs/heads/main'
+        working-directory: .
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
