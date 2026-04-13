@@ -1,39 +1,7 @@
-name: Deployment pipeline
-
 on:
   push:
     branches:
       - main
   pull_request:
     branches: [main]
-    types:
-      - opened
-      - synchronize
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: fs-pokedex
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run linter
-        run: npm run eslint
-
-      - name: Run tests
-        run: npm test
-
-      - name: Build
-        run: npm run build
-
-      - name: Trigger Render deployment
-        if: github.ref == 'refs/heads/main'
-        working-directory: .
-        run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
+    types: [opened, synchronize]
