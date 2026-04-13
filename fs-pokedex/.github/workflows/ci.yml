@@ -1,3 +1,4 @@
+# added PR trigger
 on:
   push:
     branches:
